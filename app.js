@@ -1,9 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 3000
- const { conectarBD } = require('./database.js')
+const { conectarBD } = require('./database.js')
 
-const connection = conectarBD() 
+const connection = conectarBD()
 
 
 //servir archivos estaticos
@@ -31,9 +31,6 @@ app.get('/deportes', (req, res) => {
     res.send(rows)
   })
 
-  connection.end()
-
-
 })
 
 
@@ -42,15 +39,34 @@ app.get('/deportes/:id', (req, res) => {
   const id = req.params.id
 
   let query = `SELECT * from deporte where id=${id}`
-  console.log(query)
+
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
 
-    res.send(rows[0])
+    res.send(rows)
   })
+})
 
-  connection.end()
+app.get('/aspirantes', (req, res) => {
+  let query = 'SELECT * from persona'
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
 
+    res.send(rows)
+  })
+})
+
+//aspirantes  por ID
+app.get('/aspirantes/:id', (req, res) => {
+  const id = req.params.id
+
+  let query = `SELECT * from persona where id=${id}`
+
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+
+    res.send(rows)
+  })
 })
 
 app.listen(port, () => {
