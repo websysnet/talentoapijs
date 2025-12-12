@@ -1,11 +1,9 @@
 const express = require('express')
 const app = express()
 const port = 3000
+ const { conectarBD } = require('./database.js')
 
-
-
-
-
+const connection = conectarBD() 
 
 
 //servir archivos estaticos
@@ -21,20 +19,12 @@ app.get('/vistaDeportes', (req, res) => {
   res.send('/public/deportes.html')
 })
 
+
+// Obtener todos los deportes
 app.get('/deportes', (req, res) => {
 
 
-  const mysql = require('mysql')
-  const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'adminbd',
-    password: 'admin1234$',
-    database: 'talentodb'
-  })
-
-  connection.connect()
-
-  let query = 'SELECT * from deportes'
+  let query = 'SELECT * from deporte'
   connection.query(query, (err, rows, fields) => {
     if (err) throw err
 
@@ -46,6 +36,23 @@ app.get('/deportes', (req, res) => {
 
 })
 
+
+// Obtener un deporte por ID
+app.get('/deportes/:id', (req, res) => {
+  const id = req.params.id
+
+  let query = `SELECT * from deporte where id=${id}`
+  console.log(query)
+  connection.query(query, (err, rows, fields) => {
+    if (err) throw err
+
+    res.send(rows[0])
+  })
+
+  connection.end()
+
+})
+
 app.listen(port, () => {
-  console.log(`Talentoapijs listening on port ${port}`)
+  console.log(`Talentoapijs app listening on port ${port}`)
 })

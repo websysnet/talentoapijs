@@ -2,7 +2,7 @@ function conectarBD() {
     const connection = mysql.createConnection({
         host: "localhost",
         user: "adminbd",
-        password: "admin1234$",
+        password: "Admin123456$",
         database: "talentodb"
     });
 
@@ -19,4 +19,4 @@ function conectarBD() {
 
 const mysql = require('mysql');
 
-module.exports = { conectarBD };
+module.exports = { conectarBD }; 
