@@ -34,9 +34,8 @@ app.get('/deportes', (req, res) => {
 
   connection.connect()
 
-
   let query = 'SELECT * from deportes'
-  conexion.query(query, (err, rows, fields) => {
+  connection.query(query, (err, rows, fields) => {
     if (err) throw err
 
     res.send(rows)
