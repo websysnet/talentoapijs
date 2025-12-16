@@ -174,5 +174,5 @@ app.get('/entrenadores/nivel/:nivel', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Talentoapijs app listening on http://${server}:${port}/`)
+  console.log(`Talentoapijs app listening on http://${hostname}:${port}/`)
 })
