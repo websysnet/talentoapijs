@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 require('dotenv').config()
 const app = express()
 const port = 3000
@@ -7,6 +8,9 @@ const { conectarBD } = require('./database.js')
 const { hostname } = require('os')
 
 const connection = conectarBD()
+
+// Allow requests from the frontend dev server
+app.use(cors({ origin: 'http://localhost:5173' }))
 
 
 //servir archivos estaticos
