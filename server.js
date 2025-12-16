@@ -1,7 +1,10 @@
 const express = require('express')
+require('dotenv').config()
 const app = express()
 const port = 3000
+
 const { conectarBD } = require('./database.js')
+const { hostname } = require('os')
 
 const connection = conectarBD()
 
@@ -171,5 +174,5 @@ app.get('/entrenadores/nivel/:nivel', (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Talentoapijs app listening on port ${port}`)
+  console.log(`Talentoapijs app listening on http://${server}:${port}/`)
 })
