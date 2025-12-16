@@ -1,9 +1,9 @@
 function conectarBD() {
     const connection = mysql.createConnection({
-        host: "localhost",
-        user: "adminbd",
-        password: "Admin123456$",
-        database: "talentodb"   
+        host: host,
+        user: user,
+        password: password,
+        database: database
     });
 
     connection.connect((err) => {
@@ -16,6 +16,11 @@ function conectarBD() {
 
     return connection;
 }
-
+``
 const mysql = require('mysql');
+const host = process.env.DB_HOST; 
+const user = process.env.DB_USER;   
+const password = process.env.DB_PASSWORD ;
+const database = process.env.DB_NAME ;
+
 module.exports = { conectarBD }; 
